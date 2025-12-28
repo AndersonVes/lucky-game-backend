@@ -1,0 +1,10 @@
+from sqlalchemy import Column, Integer, String
+from app.models.base import Base
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    facebook_id = Column(String, unique=True, index=True, nullable=False)
+    name = Column(String, nullable=False)   # ✅ ADICIONE ISSO
+    coins = Column(Integer, default=100)
