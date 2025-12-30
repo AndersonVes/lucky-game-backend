@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_db
+from app.core.security import create_access_token
 from app.services.auth_facebook import (
     validate_facebook_token,
     get_facebook_user,
@@ -20,24 +21,30 @@ def dev_login(db: Session = Depends(get_db)):
         name="Dev User"
     )
 
+    access_token = create_access_token(user.id)
+
     return {
-        "id": user.id,
-        "facebook_id": user.facebook_id,
-        "name": user.name,
-        "balance": wallet.balance
+        "token": access_token,
+        "user": {
+            "id": user.id,
+            "name": user.name
+        },
+        "wallet": {
+            "balance": wallet.balance
+        }
     }
 
 
 @router.post("/facebook")
 def facebook_login(payload: dict, db: Session = Depends(get_db)):
-    token = payload.get("access_token")
-    if not token:
+    fb_token = payload.get("access_token")
+    if not fb_token:
         raise HTTPException(400, "Token ausente")
 
-    if not validate_facebook_token(token):
+    if not validate_facebook_token(fb_token):
         raise HTTPException(401, "Token inválido")
 
-    fb = get_facebook_user(token)
+    fb = get_facebook_user(fb_token)
 
     user, wallet = get_or_create_user_with_wallet(
         db=db,
@@ -45,8 +52,15 @@ def facebook_login(payload: dict, db: Session = Depends(get_db)):
         name=fb["name"]
     )
 
+    access_token = create_access_token(user.id)
+
     return {
-        "id": user.id,
-        "name": user.name,
-        "balance": wallet.balance
+        "token": access_token,
+        "user": {
+            "id": user.id,
+            "name": user.name
+        },
+        "wallet": {
+            "balance": wallet.balance
+        }
     }
