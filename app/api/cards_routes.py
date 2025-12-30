@@ -10,6 +10,8 @@ router = APIRouter(prefix="/cards", tags=["cards"])
 
 @router.post("/new-game")
 def new_game(payload: dict, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    # TODO: logica para gerar cartas baseado no usuario, historico, etc.
+    # TODO: criar um objeto de card para retornar ao invés de strings simples
     cards_array = generate_new_game_cards(
         user=current_user,
         rare_item=payload.get("rare_item", None),
