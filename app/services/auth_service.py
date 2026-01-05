@@ -35,8 +35,7 @@ def get_or_create_user_with_wallet(
         db.flush()
 
         wallet = Wallet(
-            user_id=user.id,
-            balance=INITIAL_BALANCE
+            user_id=user.id
         )
         db.add(wallet)
     else:

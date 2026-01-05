@@ -27,7 +27,7 @@ def dev_login(db: Session = Depends(get_db)):
     return {
         "access_token": token,
         "token_type": "bearer",
-        "user": {"id": user.id, "name": user.full_name, "balance": wallet.balance},
+        "user": {"id": user.id, "name": user.full_name},
     }
 
 
@@ -57,7 +57,7 @@ def facebook_login(payload: dict, db: Session = Depends(get_db)):
     return {
         "access_token": token,
         "token_type": "bearer",
-        "user": {"id": user.id, "name": user.full_name, "balance": wallet.balance},
+        "user": {"id": user.id, "name": user.full_name, },
     }
 
 
@@ -84,5 +84,5 @@ def google_login(payload: dict, db: Session = Depends(get_db)):
     return {
         "access_token": token,
         "token_type": "bearer",
-        "user": {"id": user.id, "name": user.full_name, "balance": wallet.balance},
+        "user": {"id": user.id, "name": user.full_name, },
     }

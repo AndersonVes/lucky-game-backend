@@ -1,7 +1,9 @@
 from os import name
 from sqlalchemy import Column, Float, Integer, String, ForeignKey, DateTime
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 from app.models.base import Base
+
 
 class Buildings(Base):
     __tablename__ = "buildings"
@@ -25,3 +27,8 @@ class Buildings(Base):
     # timestamps
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+    village = relationship(
+        "Villages",
+        back_populates="buildings"
+    )

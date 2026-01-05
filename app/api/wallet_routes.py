@@ -20,4 +20,4 @@ def get_wallet(
         .first()
     )
 
-    return {"balance": wallet.balance}
+    return     wallet

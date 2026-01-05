@@ -48,7 +48,7 @@ def seed_villages_and_buildings(db):
                 id=4,
                 name="Vila Imperial",
                 order=4,
-                building_cost_modifier=1.50,
+                building_cost_modifier=1.45,
                 coins=6500,
                 gems=18,
                 xp=850,
@@ -59,7 +59,7 @@ def seed_villages_and_buildings(db):
                 id=5,
                 name="Capital Lendária",
                 order=5,
-                building_cost_modifier=1.75,
+                building_cost_modifier=1.6,
                 coins=10000,
                 gems=25,
                 xp=1300,
@@ -79,6 +79,7 @@ def seed_villages_and_buildings(db):
             # VILA 1 — INICIAL
             # =========================
             Buildings(
+                id=1,
                 village_id=1,
                 name="Casa Simples",
                 building_stages=4,
@@ -86,12 +87,23 @@ def seed_villages_and_buildings(db):
                 cost_multiplier=1.25,
             ),
             Buildings(
-                village_id=1, name="Poço", building_stages=4, base_cost=450, cost_multiplier=1.28
+                id=2,
+                village_id=1,
+                name="Poço",
+                building_stages=4,
+                base_cost=450,
+                cost_multiplier=1.28,
             ),
             Buildings(
-                village_id=1, name="Celeiro", building_stages=4, base_cost=650, cost_multiplier=1.30
+                id=3,
+                village_id=1,
+                name="Celeiro",
+                building_stages=4,
+                base_cost=650,
+                cost_multiplier=1.30,
             ),
             Buildings(
+                id=4,
                 village_id=1,
                 name="Prefeitura",
                 building_stages=4,
@@ -102,12 +114,23 @@ def seed_villages_and_buildings(db):
             # VILA 2 — MERCANTIL
             # =========================
             Buildings(
-                village_id=2, name="Mercado", building_stages=4, base_cost=900, cost_multiplier=1.30
+                id=5,
+                village_id=2,
+                name="Mercado",
+                building_stages=4,
+                base_cost=900,
+                cost_multiplier=1.30,
             ),
             Buildings(
-                village_id=2, name="Moinho", building_stages=4, base_cost=1200, cost_multiplier=1.32
+                id=6,
+                village_id=2,
+                name="Moinho",
+                building_stages=4,
+                base_cost=1200,
+                cost_multiplier=1.32,
             ),
             Buildings(
+                id=7,
                 village_id=2,
                 name="Oficina",
                 building_stages=4,
@@ -115,6 +138,7 @@ def seed_villages_and_buildings(db):
                 cost_multiplier=1.35,
             ),
             Buildings(
+                id=8,
                 village_id=2,
                 name="Banco Mercantil",
                 building_stages=4,
@@ -125,6 +149,7 @@ def seed_villages_and_buildings(db):
             # VILA 3 — REAL
             # =========================
             Buildings(
+                id=9,
                 village_id=3,
                 name="Guarda Real",
                 building_stages=4,
@@ -132,6 +157,7 @@ def seed_villages_and_buildings(db):
                 cost_multiplier=1.35,
             ),
             Buildings(
+                id=10,
                 village_id=3,
                 name="Jardins Reais",
                 building_stages=4,
@@ -139,6 +165,7 @@ def seed_villages_and_buildings(db):
                 cost_multiplier=1.38,
             ),
             Buildings(
+                id=11,
                 village_id=3,
                 name="Salão do Trono",
                 building_stages=4,
@@ -146,6 +173,7 @@ def seed_villages_and_buildings(db):
                 cost_multiplier=1.42,
             ),
             Buildings(
+                id=12,
                 village_id=3,
                 name="Castelo",
                 building_stages=4,
@@ -156,64 +184,72 @@ def seed_villages_and_buildings(db):
             # VILA 4 — IMPERIAL
             # =========================
             Buildings(
+                id=13,
                 village_id=4,
                 name="Quartel Imperial",
                 building_stages=4,
-                base_cost=5200,
-                cost_multiplier=1.45,
+                base_cost=3000,
+                cost_multiplier=1.38,
             ),
             Buildings(
+                id=14,
                 village_id=4,
                 name="Aqueduto",
                 building_stages=4,
-                base_cost=6800,
-                cost_multiplier=1.48,
+                base_cost=3600,
+                cost_multiplier=1.4,
             ),
             Buildings(
+                id=15,
                 village_id=4,
                 name="Câmara Imperial",
                 building_stages=4,
-                base_cost=8800,
-                cost_multiplier=1.52,
+                base_cost=4800,
+                cost_multiplier=1.42,
             ),
             Buildings(
+                id=16,
                 village_id=4,
                 name="Palácio Imperial",
                 building_stages=4,
-                base_cost=11500,
-                cost_multiplier=1.55,
+                base_cost=6000,
+                cost_multiplier=1.48,
             ),  # âncora
             # =========================
             # VILA 5 — LENDÁRIA
             # =========================
             Buildings(
+                id=17,
                 village_id=5,
                 name="Santuário Antigo",
                 building_stages=4,
-                base_cost=14500,
-                cost_multiplier=1.55,
+                base_cost=4500,
+                cost_multiplier=1.45,
             ),
             Buildings(
+                id=18,
                 village_id=5,
                 name="Biblioteca Arcana",
                 building_stages=4,
-                base_cost=19000,
-                cost_multiplier=1.58,
+                base_cost=5500,
+                cost_multiplier=1.48,
             ),
             Buildings(
+                id=19,
                 village_id=5,
                 name="Forja Lendária",
                 building_stages=4,
-                base_cost=24500,
-                cost_multiplier=1.62,
+                base_cost=7000,
+                cost_multiplier=1.5,
             ),
             Buildings(
+                id=20,
                 village_id=5,
                 name="Trono dos Deuses",
                 building_stages=4,
-                base_cost=32000,
-                cost_multiplier=1.65,
-            ),  # âncora
+                base_cost=9000,
+                cost_multiplier=1.55,
+            ),
         ]
 
         db.bulk_save_objects(buildings)
