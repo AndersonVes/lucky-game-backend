@@ -1,5 +1,6 @@
 from sqlalchemy import Column, DateTime, Integer, String
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 from app.models.base import Base
 
 class User(Base):
@@ -17,11 +18,22 @@ class User(Base):
     locale = Column(String, nullable=True)
     picture_url = Column(String, nullable=True)
 
+    #progression
+    user_level = Column(Integer, nullable=False, default=1)
+    village_level = Column(Integer, nullable=False, default=1)
+
     # timestamps
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+
+    user_buildings = relationship(
+        "UserBuilding",
+        back_populates="user"
+    )
 
     __table_args__ = (
         # garante unicidade por provider
         {"sqlite_autoincrement": True},
     )
+
