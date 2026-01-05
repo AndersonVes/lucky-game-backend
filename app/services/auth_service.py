@@ -23,21 +23,20 @@ def get_or_create_user(
     )
 
     if not user:
-        user = User(
-            auth_provider=auth_provider,
-            provider_user_id=provider_user_id,
-            full_name=full_name,
-            email=email,
-            locale=locale,
-            picture_url=picture_url,
-        )
-        db.add(user)
-        db.flush()
+        try:
+            user = User(...)
+            db.add(user)
+            db.flush()
 
-        wallet = Wallet(user_id=user.id)
-        db.add(wallet)
+            wallet = Wallet(user_id=user.id)
+            db.add(wallet)
 
-        next_village(db, village_id=1, user_id=user.id)
+            next_village(db, village_id=1, user_id=user.id)
+
+            db.commit()
+        except Exception:
+            db.rollback()
+            raise
     else:
         wallet = db.query(Wallet).filter(Wallet.user_id == user.id).first()
 
