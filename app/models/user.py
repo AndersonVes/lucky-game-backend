@@ -32,6 +32,8 @@ class User(Base):
         back_populates="user"
     )
 
+    wallet = relationship("Wallet", back_populates="user", uselist=False, lazy="joined")
+
     __table_args__ = (
         # garante unicidade por provider
         {"sqlite_autoincrement": True},

@@ -1,6 +1,6 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from jose import JWTError, jwt
 
 from app.api.deps import get_db
@@ -24,7 +24,13 @@ def get_current_user(
     except JWTError:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED)
 
-    user = db.query(User).filter(User.id == user_id).first()
+    user = (
+        db.query(User)
+        .options(joinedload(User.wallet))
+        .filter(User.id == user_id)
+        .first()
+    )
+
     if not user:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED)
 
