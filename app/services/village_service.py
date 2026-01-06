@@ -1,10 +1,10 @@
-from sqlalchemy.orm import Session
 from fastapi import HTTPException
-from app.models import user_building
-from app.models.user import User
-from app.models.villages import Villages
+from sqlalchemy.orm import Session
+
 from app.models.buildings import Buildings
+from app.models.user import User
 from app.models.user_building import UserBuilding
+from app.models.villages import Villages
 
 
 def get_building_stage_cost(db: Session, village: Villages, building: Buildings, stage: int) -> int:
@@ -37,6 +37,7 @@ def get_actual_village(db: Session, user: User) -> dict:
             Villages.completion_reward_gems,
             Villages.completion_reward_xp,
             Villages.completion_reward_energy,
+            Villages.completion_reward_item_id,
         )
         .filter(Villages.id == user.actual_village)
         .first()
@@ -115,6 +116,7 @@ def get_actual_village(db: Session, user: User) -> dict:
             "coins": village.completion_reward_coins,
             "gems": village.completion_reward_gems,
             "energy": village.completion_reward_energy,
+            "item_id": village.completion_reward_item_id,
         },
         "buildings": buildings,
     }

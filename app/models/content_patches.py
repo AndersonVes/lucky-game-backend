@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, Column, Integer, String, DateTime
 from sqlalchemy.sql import func
 from app.models.base import Base
 
-class ContentPatch(Base):
+class ContentPatches(Base):
     __tablename__ = "content_patches"
 
     id = Column(Integer, primary_key=True)
@@ -23,3 +23,5 @@ class ContentPatch(Base):
     # timestamps
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+

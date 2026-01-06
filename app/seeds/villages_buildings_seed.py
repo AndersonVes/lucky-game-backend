@@ -1,6 +1,6 @@
-from app.models.villages import Villages
-from app.models.buildings import Buildings
 from app.core.database import SessionLocal
+from app.models.buildings import Buildings
+from app.models.villages import Villages
 
 
 def seed_villages_and_buildings(db):
@@ -14,57 +14,52 @@ def seed_villages_and_buildings(db):
             Villages(
                 id=1,
                 name="Vila Inicial",
-                order=1,
                 building_cost_modifier=1.00,
-                copletion_reward_coins=1500,
-                copletion_reward_gems=5,
-                copletion_reward_xp=200,
-                copletion_reward_energy=10,
-                item_slug="hat_basic",
+                completion_reward_coins=1500,
+                completion_reward_gems=5,
+                completion_reward_xp=200,
+                completion_reward_energy=10,
+                completion_reward_item_id=5,
             ),
             Villages(
                 id=2,
                 name="Vila Mercantil",
-                order=2,
                 building_cost_modifier=1.15,
-                copletion_reward_coins=2500,
-                copletion_reward_gems=8,
-                copletion_reward_xp=350,
-                copletion_reward_energy=12,
-                item_slug="outfit_merchant",
+                completion_reward_coins=2500,
+                completion_reward_gems=8,
+                completion_reward_xp=350,
+                completion_reward_energy=12,
+                completion_reward_item_id=1,
             ),
             Villages(
                 id=3,
                 name="Vila Real",
-                order=3,
                 building_cost_modifier=1.30,
-                copletion_reward_coins=4000,
-                copletion_reward_gems=12,
-                copletion_reward_xp=550,
-                copletion_reward_energy=15,
-                item_slug="crown_bronze",
+                completion_reward_coins=4000,
+                completion_reward_gems=12,
+                completion_reward_xp=550,
+                completion_reward_energy=15,
+                completion_reward_item_id=7,
             ),
             Villages(
                 id=4,
                 name="Vila Imperial",
-                order=4,
                 building_cost_modifier=1.45,
-                copletion_reward_coins=6500,
-                copletion_reward_gems=18,
-                copletion_reward_xp=850,
-                copletion_reward_energy=18,
-                item_slug="armor_imperial",
+                completion_reward_coins=6500,
+                completion_reward_gems=18,
+                completion_reward_xp=850,
+                completion_reward_energy=18,
+                completion_reward_item_id=8,
             ),
             Villages(
                 id=5,
                 name="Capital Lendária",
-                order=5,
                 building_cost_modifier=1.6,
-                copletion_reward_coins=10000,
-                copletion_reward_gems=25,
-                copletion_reward_xp=1300,
-                copletion_reward_energy=22,
-                item_slug="relic_legendary",
+                completion_reward_coins=10000,
+                completion_reward_gems=25,
+                completion_reward_xp=1300,
+                completion_reward_energy=22,
+                completion_reward_item_id=9,
             ),
         ]
 
@@ -263,3 +258,4 @@ def seed_villages_and_buildings(db):
 
     finally:
         db.close()
+

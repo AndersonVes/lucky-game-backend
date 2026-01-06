@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models.content_patch import ContentPatch
+from app.models.content_patches import ContentPatches
 
 
 def get_active_patch(db: Session) -> dict | None:
@@ -9,8 +9,8 @@ def get_active_patch(db: Session) -> dict | None:
     """
 
     patch = (
-        db.query(ContentPatch)
-        .filter(ContentPatch.active == True)
+        db.query(ContentPatches)
+        .filter(ContentPatches.active == True)
         .first()
     )
 

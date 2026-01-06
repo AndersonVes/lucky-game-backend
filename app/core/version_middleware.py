@@ -64,6 +64,7 @@ class VersionMiddleware(BaseHTTPMiddleware):
                     content={
                         "error": "APP_UPDATE_REQUIRED",
                         "appVersionMin": patch["appVersionMin"],
+                        "latestPatch":"/patch/latest    "
                     },
                 )
             
@@ -84,12 +85,13 @@ class VersionMiddleware(BaseHTTPMiddleware):
                     content={"error": "INVALID_CONTENT_VERSION"},
                 )
 
-            if content_version < patch["contentVersion"]:
+            if Version(content_version) < Version(patch["contentVersion"]):
                 return JSONResponse(
                     status_code=426,
                     content={
                         "error": "CONTENT_UPDATE_REQUIRED",
-                        "contentVersion": patch["contentVersion"],
+                        "contentVersion": patch["contentVersion"], "latestPatch":"/patch/latest ",
+                        "contentact":content_version
                     },
                 )
 

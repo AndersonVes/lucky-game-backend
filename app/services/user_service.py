@@ -24,7 +24,14 @@ def get_or_create_user(
 
     if not user:
         try:
-            user = User(...)
+            user = User(
+                auth_provider=auth_provider,
+                provider_user_id=provider_user_id,
+                full_name=full_name,
+                email=email,
+                locale=locale,
+                picture_url=picture_url,
+            )
             db.add(user)
             db.flush()
 
