@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.api.deps import get_db
 from app.core.security import create_access_token
+from app.schemas.auth_schema import AuthErrorOut, AuthOut, FacebookLoginIn, GoogleLoginIn
 from app.services.auth_facebook import get_facebook_user, validate_facebook_token
 from app.services.auth_google import validate_google_token
 from app.services.user_service import get_or_create_user
@@ -10,9 +11,16 @@ from app.services.user_service import get_or_create_user
 router = APIRouter(prefix="/login", tags=["auth"])
 
 
+
 # ⚠️ DEV ONLY – remover em produção
-@router.post("/dev")
-def dev_login(db: Session = Depends(get_db)):
+@router.post(
+    "/dev",
+    response_model=AuthOut,
+    responses={
+        400: {"model": AuthErrorOut},
+    },
+)
+def dev_login(db: Session = Depends(get_db)) -> AuthOut:
     user, wallet = get_or_create_user(
         db=db,
         auth_provider="dev",
@@ -27,18 +35,31 @@ def dev_login(db: Session = Depends(get_db)):
     return {
         "access_token": token,
         "token_type": "bearer",
-        "user": {"id": user.id, "name": user.full_name},
+        "user": {
+            "id": user.id,
+            "name": user.full_name,
+        },
     }
 
 
-@router.post("/facebook")
-def facebook_login(payload: dict, db: Session = Depends(get_db)):
-    access_token = payload.get("access_token")
+@router.post(
+    "/facebook",
+    response_model=AuthOut,
+    responses={
+        400: {"model": AuthErrorOut},
+        401: {"model": AuthErrorOut},
+    },
+)
+def facebook_login(
+    payload: FacebookLoginIn,
+    db: Session = Depends(get_db),
+) -> AuthOut:
+    access_token = payload.access_token
     if not access_token:
-        raise HTTPException(400, "Token ausente")
+        raise HTTPException(status_code=400, detail="Token ausente")
 
     if not validate_facebook_token(access_token):
-        raise HTTPException(401, "Token inválido")
+        raise HTTPException(status_code=401, detail="Token inválido")
 
     fb = get_facebook_user(access_token)
 
@@ -64,11 +85,21 @@ def facebook_login(payload: dict, db: Session = Depends(get_db)):
     }
 
 
-@router.post("/google")
-def google_login(payload: dict, db: Session = Depends(get_db)):
-    id_token = payload.get("id_token")
+@router.post(
+    "/google",
+    response_model=AuthOut,
+    responses={
+        400: {"model": AuthErrorOut},
+        401: {"model": AuthErrorOut},
+    },
+)
+def google_login(
+    payload: GoogleLoginIn,
+    db: Session = Depends(get_db),
+) -> AuthOut:
+    id_token = payload.id_token
     if not id_token:
-        raise HTTPException(400, "Token ausente")
+        raise HTTPException(status_code=400, detail="Token ausente")
 
     google_user = validate_google_token(id_token)
 
