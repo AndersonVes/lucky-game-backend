@@ -7,10 +7,7 @@ from app.models.buildings import Buildings
 from app.models.user_building import UserBuilding
 
 
-def get_building_stage_cost(db: Session, village_id: int, building: Buildings, stage: int) -> int:
-    village = db.query(Villages).filter(Villages.id == village_id).first()
-    if not village:
-        raise HTTPException(status_code=404, detail="Village not found")
+def get_building_stage_cost(db: Session, village: Villages, building: Buildings, stage: int) -> int:
 
     if not building:
         raise HTTPException(status_code=404, detail="Building not found in the specified village")
@@ -30,8 +27,23 @@ def get_building_stage_cost(db: Session, village_id: int, building: Buildings, s
     return cost
 
 
-def get_actual_village_user_building(db: Session, user: User) -> dict:
-    actual_village = user.village_level
+def get_actual_village(db: Session, user: User) -> dict:
+    village = (
+        db.query(
+            Villages.id,
+            Villages.name,
+            Villages.building_cost_modifier,
+            Villages.completion_reward_coins,
+            Villages.completion_reward_gems,
+            Villages.completion_reward_xp,
+            Villages.completion_reward_energy,
+        )
+        .filter(Villages.id == user.actual_village)
+        .first()
+    )
+
+    if not village:
+        raise HTTPException(status_code=404, detail="Village not found")
 
     rows = (
         db.query(
@@ -49,9 +61,12 @@ def get_actual_village_user_building(db: Session, user: User) -> dict:
             UserBuilding.updated_at.label("user_building_updated_at"),
         )
         .join(Buildings)
-        .filter(Buildings.village_id == actual_village, UserBuilding.user_id == user.id)
+        .filter(Buildings.village_id == village.id, UserBuilding.user_id == user.id)
         .all()
     )
+
+    if not rows:
+        raise HTTPException(status_code=404, detail="No buildings found for the user's village")
 
     buildings = []
     for row in rows:
@@ -70,7 +85,6 @@ def get_actual_village_user_building(db: Session, user: User) -> dict:
             user_building_updated_at,
         ) = row
         building_dict = {
-            
             "id": building_id,
             "name": name,
             "building_stages": building_stages,
@@ -79,19 +93,31 @@ def get_actual_village_user_building(db: Session, user: User) -> dict:
             "next_stage": {
                 "max": user_building_current_stage >= building_stages,
                 "cost": (
-                    get_building_stage_cost(
-                        db, actual_village, row, user_building_current_stage + 1
-                    )
+                    get_building_stage_cost(db, village, row, user_building_current_stage + 1)
                     if user_building_current_stage < building_stages
                     else None
                 ),
                 # "stage": user_building_current_stage + 1 if user_building_current_stage < building_stages else None,
             },
-            "user_building": {"id": user_building_id, "current_stage": user_building_current_stage, "created_at": user_building_created_at, "updated_at": user_building_updated_at},
+            "user_building": {
+                "id": user_building_id,
+                "current_stage": user_building_current_stage,
+                "created_at": user_building_created_at,
+                "updated_at": user_building_updated_at,
+            },
         }
         buildings.append(building_dict)
 
-    return {"village_level": actual_village, "buildings": buildings}
+    return {
+        "id": village.id,
+        "name": village.name,
+        "completion_reward": {
+            "coins": village.completion_reward_coins,
+            "gems": village.completion_reward_gems,
+            "energy": village.completion_reward_energy,
+        },
+        "buildings": buildings,
+    }
 
 
 def next_village(db: Session, village_id: int, user_id: int):

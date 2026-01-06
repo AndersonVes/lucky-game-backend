@@ -19,8 +19,8 @@ class User(Base):
     picture_url = Column(String, nullable=True)
 
     #progression
-    user_level = Column(Integer, nullable=False, default=1)
-    village_level = Column(Integer, nullable=False, default=1)
+    rank = Column(Integer, nullable=False, default=1)
+    actual_village = Column(Integer, nullable=False, default=1)
 
     # timestamps
     created_at = Column(DateTime(timezone=True), server_default=func.now())

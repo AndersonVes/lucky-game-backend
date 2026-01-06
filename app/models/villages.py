@@ -13,10 +13,11 @@ class Villages(Base):
     building_cost_modifier = Column(Float, nullable=False, default=1.0)
     
     #reward on completion of all buildings
-    coins = Column(Integer, nullable=False, default=0)
-    gems = Column(Integer, nullable=False, default=0)
-    xp = Column(Integer, nullable=False, default=0)
-    energy = Column(Integer, nullable=False, default=0)
+    
+    completion_reward_coins = Column(Integer, nullable=False, default=0)
+    completion_reward_gems = Column(Integer, nullable=False, default=0)
+    completion_reward_xp = Column(Integer, nullable=False, default=0)
+    completion_reward_energy = Column(Integer, nullable=False, default=0)
     item_slug = Column(String, nullable=True)
 
     
