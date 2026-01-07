@@ -4,7 +4,9 @@ from app.services.auth_google import GOOGLE_CLIENT_ID
 
 class Settings(BaseSettings):
     ENV: str = "dev"
-
+    
+    DB_URL: str
+    
     DB_HOST: str
     DB_PORT: int
     DB_NAME: str
@@ -19,6 +21,5 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
-        extra = "forbid"
 
 settings = Settings()
