@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_db
+from app.core.deps import get_db
 from app.core.security import create_access_token
 from app.schemas.auth_schema import AuthErrorOut, AuthOut, FacebookLoginIn, GoogleLoginIn
 from app.services.auth_facebook import get_facebook_user, validate_facebook_token

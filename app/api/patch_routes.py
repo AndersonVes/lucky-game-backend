@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_db
+from app.core.deps import get_db
 from app.schemas.patch_schema import PatchLatestOut
 from app.services.content_patch_service import get_active_patch
 
