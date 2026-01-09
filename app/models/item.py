@@ -18,7 +18,7 @@ class Item(Base):
 
     # TODO price  em coins/gems/userLevel/newVillage/envento
 
-    user_items = relationship("UserItem", back_populates="items")
+    user_item = relationship("UserItem", back_populates="item")
 
     
     created_at = Column(DateTime(timezone=True), server_default=func.now())

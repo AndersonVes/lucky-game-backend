@@ -6,20 +6,25 @@ from app.core.deps import get_db
 from app.core.auth import get_current_user
 from app.models.user import User
 from app.schemas.card_schema import CardOut
-from app.services.cards_service import get_rare_item_probability, get_game_hash, get_jackpot_probability
+from app.services.cards_service import (
+    get_rare_item_probability,
+    get_game_hash,
+    get_jackpot_probability,
+)
 
 router = APIRouter(prefix="/cards", tags=["cards"])
 
 
 @router.get("/new-game")
 def new_game(
-    goal_card: Optional[str] = Query(None), db: Session = Depends(get_db), current_user: User = Depends(get_current_user)
+    goal_card: Optional[str] = Query(
+        None
+    ),  # goal_card eh o item_slug por enquanto, mas pode ser adicionado mais coisas
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     # TODO: logica para gerar cartas baseado no usuario, historico, etc.
     # TODO evitar ganhar item repetido
-      # goal_card eh o item_slug por enquanto, mas pode ser adicionado mais coisas
-    print('goal_card')
-    print(goal_card)
 
     new_game = {
         "hash": get_game_hash(current_user, goal_card),
@@ -32,9 +37,6 @@ def new_game(
     }
 
     return new_game
-
-
-
 
 
 @router.post("/reveal-card")

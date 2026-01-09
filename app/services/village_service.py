@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from app.models.buildings import Building
+from app.models.building import Building
 from app.models.user import User
 from app.models.user_building import UserBuilding
 from app.models.villages import Villages

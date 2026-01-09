@@ -28,5 +28,5 @@ class Building(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
-    village = relationship("Villages", back_populates="buildings")
-    user_buildings = relationship("UserBuilding", back_populates="buildings")
+    village = relationship("Villages", back_populates="building")
+    user_building = relationship("UserBuilding", back_populates="building")

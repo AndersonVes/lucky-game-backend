@@ -1,6 +1,7 @@
 import os
 
 from app.core.database import SessionLocal
+from app.seeds.items_seed import seed_items
 from app.seeds.villages_buildings_seed import seed_villages_and_buildings
 from app.seeds.content_patches_seed import seed_patches
 
@@ -10,7 +11,9 @@ def run_seeds():
     try:
         seed_villages_and_buildings(db)
         seed_patches(db)
-        print("✅ All seeds executed successfully")
+        seed_items(db)
+        
+        print("✅✅✅ All seeds executed successfully")
     finally:
         db.close()
 

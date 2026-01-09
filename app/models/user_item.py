@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from app.models.base import Base
 
 class UserItem(Base):
-    __tablename__ = "user_buildings"
+    __tablename__ = "user_items"
 
     id = Column(Integer, primary_key=True, index=True)
 
@@ -18,16 +18,16 @@ class UserItem(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     __table_args__ = (
-        {"sqlite_autoincrement": True},
         CheckConstraint("stack_size > 0", name="ck_cards_stack_size_positive"),
+        {"sqlite_autoincrement": True},
     )
 
     user = relationship(
         "User",
-        back_populates="user_items"
+        back_populates="user_item"
     )
 
     item = relationship(
         "Item",
-        back_populates="user_items"
+        back_populates="user_item"
     )

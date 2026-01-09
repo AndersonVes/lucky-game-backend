@@ -1,5 +1,5 @@
 from app.core.database import SessionLocal
-from app.models.buildings import Building
+from app.models.building import Building
 from app.models.villages import Villages
 
 

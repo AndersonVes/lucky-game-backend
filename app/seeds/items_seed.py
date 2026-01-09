@@ -1,5 +1,5 @@
 from app.core.database import SessionLocal
-from app.models.items import Item
+from app.models.item import Item
 
 
 def seed_items(db):

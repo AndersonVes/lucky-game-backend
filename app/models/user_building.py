@@ -24,6 +24,6 @@ class UserBuilding(Base):
         {"sqlite_autoincrement": True},
     )
 
-    user = relationship("User", back_populates="user_buildings")
+    user = relationship("User", back_populates="user_building")
 
-    building = relationship("Building", back_populates="user_buildings")
+    building = relationship("Building", back_populates="user_building")

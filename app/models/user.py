@@ -27,8 +27,13 @@ class User(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
 
-    user_buildings = relationship(
+    user_building = relationship(
         "UserBuilding",
+        back_populates="user"
+    )
+
+    user_item = relationship(
+        "UserItem",
         back_populates="user"
     )
 
