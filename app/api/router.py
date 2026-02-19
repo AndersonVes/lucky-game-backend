@@ -9,6 +9,7 @@ from app.api.user_routes import router as user_router
 from app.api.system_routes import router as system_router
 from app.api.items_routes import router as items_router
 from app.api.dev_routes import router as dev_router
+from app.api.events_routes import router as events_router
 
 api_router = APIRouter()
 
@@ -20,3 +21,4 @@ api_router.include_router(user_router)
 api_router.include_router(system_router)
 api_router.include_router(items_router)
 api_router.include_router(dev_router)
+api_router.include_router(events_router)

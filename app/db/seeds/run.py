@@ -2,6 +2,7 @@ import os
 
 from app.core.database import SessionLocal
 from app.db.seeds.content_patches_seed import seed_patches
+from app.db.seeds.events_seed import seed_events
 from app.db.seeds.items_seed import seed_items
 from app.db.seeds.villages_buildings_seed import seed_villages_and_buildings
 
@@ -12,6 +13,7 @@ def run_seeds():
         seed_items(db)
         seed_villages_and_buildings(db)
         seed_patches(db)
+        seed_events(db)
 
         print("✅✅✅ All seeds executed successfully")
     finally:

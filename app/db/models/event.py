@@ -26,8 +26,8 @@ class Event(Base):
 
     type = Column(Enum("seasonal", "progression", name="event_type"), nullable=False)
     spin_currency = Column(
-        Enum("tickets", "gems", "coins", "energy", default="tickets", name="event_spin_currency"),
-        nullable=False,
+        Enum("tickets", "gems", "coins", "energy", name="event_spin_currency"),
+        nullable=False, default="tickets"
     )
     cost_per_spin = Column(Integer, nullable=False, default=10)
 

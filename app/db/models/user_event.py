@@ -13,7 +13,6 @@ class UserEvent(Base):
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     event_id = Column(Integer, ForeignKey("events.id"), nullable=False)
 
-    active = Column(DateTime(timezone=True), nullable=True)
     finished_at = Column(DateTime(timezone=True), nullable=True)
 
     # timestamps
