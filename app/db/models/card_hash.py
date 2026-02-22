@@ -44,6 +44,6 @@ class CardHash(Base):
 
     __table_args__ = (
         CheckConstraint(
-            "reward_focus IN ('event_item', 'coins_jackpot')", name="ck_card_hashes_reward_focus"
+            "reward_focus IN ('event_items', 'coins_jackpot')", name="ck_card_hashes_reward_focus"
         ),
     )

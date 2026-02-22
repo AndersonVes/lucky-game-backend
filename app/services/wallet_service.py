@@ -57,7 +57,7 @@ def _get_energy_from_reward_slug(
 def add_currency(
     db: Session,
     user: User,
-    currency: Literal["xp", "coins", "gems", "energy"] | None = None,
+    currency: Literal["xp", "coins", "gems", "energy", "tickets"] | None = None,
     amount: int = None,
     reward_slug: str = None,
 ):
@@ -79,7 +79,7 @@ def add_currency(
     if active_boost:
         multiplier = active_boost.multiplier
 
-    allowed_currencies = {"coins", "xp", "gems", "energy"}
+    allowed_currencies = {"coins", "xp", "gems", "energy", "tickets"}
 
     if reward_slug:
         prefix = reward_slug.split("_", 1)[0]
@@ -122,7 +122,7 @@ def add_currency(
 
 
 def deduce_currency(
-    db: Session, user: User, currency: Literal["xp", "coins", "gems", "energy"], amount: int
+    db: Session, user: User, currency: Literal["xp", "coins", "gems", "energy", "tickets"], amount: int
 ):
     amount = int(amount)
     setattr(user.wallet, currency, getattr(user.wallet, currency) - (amount))
@@ -151,7 +151,7 @@ def _calculate_energy_gain(last_energy_at: datetime) -> int:
     return energy_gain
 
 
-def _apply_energy_regen(db: Session, user: User) -> None:
+def apply_energy_regen(db: Session, user: User) -> None:
     gained = _calculate_energy_gain(user.wallet.last_energy_at)
 
     if gained <= 0:
@@ -169,7 +169,7 @@ def _apply_energy_regen(db: Session, user: User) -> None:
 
 
 def get_energy_data(db: Session, user: User) -> dict:
-    _apply_energy_regen(db, user)
+    apply_energy_regen(db, user)
 
     now = utcnow()
     last_energy_at = user.wallet.last_energy_at

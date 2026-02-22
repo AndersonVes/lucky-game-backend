@@ -5,7 +5,7 @@ from pydantic import UUID4, BaseModel, Field, NonNegativeFloat, NonNegativeInt
 
 
 class NewGameIn(BaseModel):
-    goal_card: Optional[str] = Field(
+    event_slug: Optional[str] = Field(
         default=None,
         description="Slug da carta objetivo (ex: item3). Caso não esteja presente, o jogo será de coins_jackpot.",
     )
@@ -14,12 +14,11 @@ class NewGameIn(BaseModel):
 class NewGameOut(BaseModel):
     game_uuid: UUID
     reward_focus: str
-    reward_probability: float = Field(
+    reward_probability: Optional[float] = Field(
         ...,
         ge=0,
         le=1,
-    )
-    item_slug: Optional[str] = None
+    ) 
 
 
 class RevealCardIn(BaseModel):

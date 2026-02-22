@@ -28,20 +28,25 @@ def new_game(
     query: NewGameIn = Depends(),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
-) -> NewGameOut:
+):# -> NewGameOut:
     try:
-        game = create_or_get_game(
+        game, items = create_or_get_game(
             db=db,
             user=current_user,
-            goal_card=query.goal_card,
+            event_slug=query.event_slug,
         )
-        db.commit()
-        return {
+        card_data =  {
             "game_uuid": game.id,
             "reward_focus": game.reward_focus,
             "reward_probability": game.reward_probability,
-            "item_slug": game.item_slug,
+            "event_slug": game.event_slug,
         }
+        if items:
+            card_data["items"] = items
+            card_data.pop("reward_probability", None)
+        db.commit()
+        return card_data
+
 
     except HTTPException as e:
         db.rollback()
