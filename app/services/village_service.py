@@ -116,10 +116,10 @@ def next_village(
         need_reset = True
         return {"need_reset": need_reset}
 
-    add_currency(db, user, "coins", next_village.starting_reward_coins)
-    add_currency(db, user, "gems", next_village.starting_reward_gems)
-    add_currency(db, user, "energy", next_village.starting_reward_energy)
-    add_currency(db, user, "xp", next_village.starting_reward_xp)
+    add_currency(db, user, "coins", amount=next_village.starting_reward_coins)
+    add_currency(db, user, "gems", amount=next_village.starting_reward_gems)
+    add_currency(db, user, "energy", amount=next_village.starting_reward_energy)
+    add_currency(db, user, "xp", amount=next_village.starting_reward_xp)
 
     try:
         add_item(db, user, next_village.starting_reward_item_slug)
@@ -218,7 +218,7 @@ def upgrade_building(db: Session, user: User, building_id: int):  # -> UpdateBui
     deduce_currency(db, user, "coins", stage_cost)
 
     xp_to_add = calculate_building_stage_xp(building.base_completion_reward_xp, ub.current_stage)
-    add_currency(db, user, "xp", xp_to_add)
+    add_currency(db, user, "xp", amount=xp_to_add)
 
     upgraded_village = False
     need_reset = False

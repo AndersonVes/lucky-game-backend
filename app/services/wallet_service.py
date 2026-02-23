@@ -163,7 +163,7 @@ def apply_energy_regen(db: Session, user: User) -> None:
     if to_add <= 0:
         return
 
-    add_currency(db, user, "energy", to_add)
+    add_currency(db, user, "energy", amount=to_add)
 
     user.wallet.last_energy_at = utcnow()
 

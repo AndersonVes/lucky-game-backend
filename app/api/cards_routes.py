@@ -5,7 +5,7 @@ from app.core.auth import get_current_user
 from app.core.deps import get_db
 from app.db.models.user import User
 from app.schemas.card_schema import NewGameIn, NewGameOut, RevealCardIn
-from app.services.cards_service import cancel_game_uuid, create_or_get_game, draw_card_weighted
+from app.services.cards_service import build_card_data, cancel_game_uuid, create_or_get_game, draw_card_weighted
 
 router = APIRouter(prefix="/cards", tags=["cards"])
 
@@ -35,15 +35,7 @@ def new_game(
             user=current_user,
             event_slug=query.event_slug,
         )
-        card_data =  {
-            "game_uuid": game.id,
-            "reward_focus": game.reward_focus,
-            "reward_probability": game.reward_probability,
-            "event_slug": game.event_slug,
-        }
-        if items:
-            card_data["items"] = items
-            card_data.pop("reward_probability", None)
+        card_data = build_card_data(game, items)  
         db.commit()
         return card_data
 

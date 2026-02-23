@@ -255,7 +255,7 @@ def create_or_get_game(
         cost_per_spin = event.cost_per_spin
 
         items = get_valid_event_items(db, user, event)
-        print(items)
+        # print(items)
 
     else:
         reward_focus = "coins_jackpot"
@@ -347,11 +347,13 @@ def draw_card_weighted(
             if reward_type == "boost":
                 result = trigger_boost(db, user, alternative_reward, boost_type="xp")
             else:
-                result = add_currency(db, user, reward_type, alternative_reward)
+                result = add_currency(db, user, currency=reward_type, reward_slug=alternative_reward)
                 if reward_type == "coins":
                     result["reward_data"]["is_jackpot"] = False
 
     elif focus_reward == "event_items":
+        get_valid_event_items(db, user, card_hash.event)
+        
         chance = random.random()
         if chance < focus_reward_probability:
             result = add_item(db, user, card_hash.event.target_item_slug)
@@ -359,7 +361,8 @@ def draw_card_weighted(
             secondary_reward_probability
             and chance < focus_reward_probability + secondary_reward_probability
         ):
-            result = add_item(db, user, card_hash.event.secondary_target_item_slug)
+            won_item = card_hash.event.secondary_target_item_slug if secondary_reward_probability else card_hash.event.target_item_slug
+            result = add_item(db, user, won_item)
         else:
             alternative_reward = _draw_weighted(
                 "event_items", secondary=True if secondary_reward_probability else False
@@ -370,3 +373,38 @@ def draw_card_weighted(
     # card_hash.used = True #TODO
 
     return result
+
+def build_card_data(game, items: dict | None):
+    card_data = {
+        "game_uuid": game.id,
+        "reward_focus": game.reward_focus,
+        "event_slug": game.event_slug,
+    }
+
+    if not items:
+        return card_data
+
+    # transforma dict indexado por slug em lista de dicts
+    cards = [
+        {
+            "slug": item["slug"],
+            "name": item["name"],
+            "item_rarity": item["rarity"],
+            "drawn_available": item["drawn_available"],
+        }
+        for item in items.values()
+    ]
+
+    has_two_items = len(cards) > 1
+
+    energy_high = {"amount": 3, "currency": "energy", "slug": "energy_high"}
+    energy_low = {"amount": 1, "currency": "energy", "slug": "energy_low"}
+
+    if has_two_items:
+        cards.extend([energy_high, energy_low, energy_low])
+    else:
+        cards.extend([energy_high, energy_low] * 2)
+
+    card_data["cards"] = cards
+
+    return card_data
