@@ -9,7 +9,8 @@ from app.db.models.user_village import UserVillage
 from app.db.models.villages import Villages
 from app.helpers.time_helper import utcnow
 from app.schemas.village_schema import BuildingOut, VillageOut
-from app.services.building_service import add_ticket_reward_building, get_next_stage_info
+from app.services.building_service import (add_ticket_reward_building,
+                                           get_next_stage_info)
 from app.services.items_service import add_item
 
 

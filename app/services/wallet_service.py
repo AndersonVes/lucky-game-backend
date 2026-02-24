@@ -3,7 +3,8 @@ from typing import Literal
 
 from sqlalchemy.orm import Session
 
-from app.config.game_consts import WALLET_MAX_ENERGY_COUNT, WALLET_MAX_ENERGY_SECONDS
+from app.config.game_consts import (WALLET_MAX_ENERGY_COUNT,
+                                    WALLET_MAX_ENERGY_SECONDS)
 from app.db.models.user import User
 from app.db.models.villages import Villages
 from app.db.models.wallet import Wallet
@@ -11,8 +12,8 @@ from app.db.models.wallet_transaction import WalletTransaction
 from app.helpers.calc_helper import get_building_cost_modifier
 from app.helpers.time_helper import utcnow
 from app.services.boost_service import get_active_boost_multiplier
-from app.services.reset_service import get_reset_coins_multiplier
 from app.services.building_service import get_building_stage_cost_by_cost_rank
+from app.services.reset_service import get_reset_coins_multiplier
 
 
 def _get_coins_from_reward_slug(

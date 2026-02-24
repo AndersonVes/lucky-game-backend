@@ -4,10 +4,11 @@ from sqlalchemy.orm import Session
 from app.core.auth import get_current_user
 from app.core.deps import get_db
 from app.db.models.user import User
-from app.schemas.village_schema import Reset, ResetAvailableOut, UpdateBuildingIn, VillageOut
+from app.schemas.village_schema import (Reset, ResetAvailableOut,
+                                        UpdateBuildingIn, VillageOut)
+from app.services.building_service import upgrade_building
 from app.services.reset_service import do_reset, reset_available
 from app.services.village_service import get_actual_village
-from app.services.building_service import upgrade_building
 
 router = APIRouter(prefix="/village", tags=["village"])
 

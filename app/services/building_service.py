@@ -5,13 +5,14 @@ from typing import Literal
 from fastapi import HTTPException
 from sqlalchemy.orm import Session, joinedload
 
-from app.config.game_consts import BUILDING_MAX_STAGE, TICKETS_BUILDING_REWARD_STAGE
+from app.config.game_consts import (BUILDING_MAX_STAGE,
+                                    TICKETS_BUILDING_REWARD_STAGE)
 from app.db.models import user_village
-from app.db.models.user_village import UserVillage
 from app.db.models.building import Building
 from app.db.models.building_upgrade_history import BuildingUpgradeHistory
 from app.db.models.user import User
 from app.db.models.user_building import UserBuilding
+from app.db.models.user_village import UserVillage
 from app.db.models.villages import Villages
 from app.helpers.calc_helper import get_building_cost_modifier
 from app.helpers.time_helper import utcnow
@@ -102,7 +103,8 @@ def get_building_stage_cost_by_cost_rank(
 
 
 def upgrade_building(db: Session, user: User, building_id: int):  # -> UpdateBuildingOut:
-    from app.services.village_service import check_village_completion, next_village
+    from app.services.village_service import (check_village_completion,
+                                              next_village)
     from app.services.wallet_service import add_currency, deduce_currency
 
     ub = (
