@@ -5,7 +5,8 @@ from app.core.auth import get_current_user
 from app.core.deps import get_db
 from app.db.models.user import User
 from app.schemas.card_schema import NewGameIn, NewGameOut, RevealCardIn
-from app.services.cards_service import build_card_data, cancel_game_uuid, create_or_get_game, draw_card_weighted
+from app.services.cards_service import (build_card_data, cancel_game_uuid,
+                                        create_or_get_game, draw_card_weighted)
 
 router = APIRouter(prefix="/cards", tags=["cards"])
 

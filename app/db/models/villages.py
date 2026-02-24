@@ -27,3 +27,8 @@ class Villages(Base):
 
     building = relationship("Building", back_populates="village")
     building_upgrade_history = relationship("BuildingUpgradeHistory", back_populates="village")
+    user_village = relationship(
+        "UserVillage",
+        back_populates="village",
+        cascade="all, delete-orphan",
+    )

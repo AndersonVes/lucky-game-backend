@@ -1,8 +1,8 @@
-from google.oauth2 import id_token
-from google.auth.transport import requests
-from fastapi import HTTPException
 import os
 
+from fastapi import HTTPException
+from google.auth.transport import requests
+from google.oauth2 import id_token
 
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 

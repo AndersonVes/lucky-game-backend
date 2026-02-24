@@ -1,5 +1,6 @@
+from packaging.version import InvalidVersion, Version
 from pydantic import BaseModel, field_validator
-from packaging.version import Version, InvalidVersion
+
 
 class PatchDownloadOut(BaseModel):
     catalogUrl: str

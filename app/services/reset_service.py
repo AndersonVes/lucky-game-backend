@@ -2,8 +2,10 @@ from sqlalchemy.orm import Session
 
 from app.db.models.user import User
 from app.db.models.user_building import UserBuilding
+from app.db.models.user_village import UserVillage
 from app.db.models.villages import Villages
-from app.services.village_service import check_village_completion, get_next_village, next_village
+from app.services.village_service import (check_village_completion,
+                                          get_next_village, next_village)
 
 
 def reset_available(db: Session, user: User):
@@ -29,6 +31,7 @@ def do_reset(db: Session, user: User):
     user.actual_village = 1
     user.resets = user.resets + 1
     db.query(UserBuilding).filter(UserBuilding.user_id == user.id).delete(synchronize_session=False)
+    db.query(UserVillage).filter(UserVillage.user_id == user.id).delete(synchronize_session=False)
 
     next_village(db, user=user)
     return True

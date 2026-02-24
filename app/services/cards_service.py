@@ -1,6 +1,6 @@
 import random
-from datetime import datetime, timezone
 import re
+from datetime import datetime, timezone
 from typing import Literal
 from uuid import UUID, uuid4
 
@@ -11,10 +11,8 @@ from sqlalchemy.orm import Session
 from app.api.events_routes import active_events
 from app.config.game_consts import (
     CARDS_ALLOWED_REWARD_FOCUS,
-    CARDS_ALTERNATIVE_REWARDS_PROBABILITIES_JACKPOT,
-    CARDS_BASE_PROBABILITIES,
-    CARDS_MIN_PROBABILITIES,
-)
+    CARDS_ALTERNATIVE_REWARDS_PROBABILITIES_JACKPOT, CARDS_BASE_PROBABILITIES,
+    CARDS_MIN_PROBABILITIES)
 from app.db.models.building import Building
 from app.db.models.card_hash import CardHash
 from app.db.models.event import Event
@@ -25,7 +23,8 @@ from app.services.boost_service import trigger_boost
 from app.services.events_service import event_is_active, get_active_events
 from app.services.items_service import add_item, user_has_item
 from app.services.reset_service import reset_available
-from app.services.wallet_service import add_currency, apply_energy_regen, deduce_currency
+from app.services.wallet_service import (add_currency, apply_energy_regen,
+                                         deduce_currency)
 
 
 def sort_card(db: Session, user: User, game_data, card_hash):

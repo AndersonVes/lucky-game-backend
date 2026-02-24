@@ -1,11 +1,12 @@
 from collections import defaultdict
 
 from fastapi import HTTPException
-from sqlalchemy.orm import Session
 from sqlalchemy import and_
+from sqlalchemy.orm import Session
+
+from app.db.models import Event, UserEvent
 from app.db.models.user import User
 from app.helpers.time_helper import utcnow
-from app.db.models import Event, UserEvent
 
 
 def event_is_active(

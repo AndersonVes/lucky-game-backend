@@ -47,4 +47,13 @@ CARDS_ALTERNATIVE_REWARDS_PROBABILITIES_JACKPOT = {
 WALLET_MAX_ENERGY_COUNT = 10
 WALLET_MAX_ENERGY_SECONDS = 300
 
-# RESET
+# VILLAGE
+BUILDING_MAX_STAGE = 4
+
+# TICKETS
+TICKETS_BUILDING_REWARD_STAGE = [
+    {"index": 0, "tickets": 2},
+    {"index": 1, "tickets": 4},
+    {"index": 2, "tickets": 10},
+    {"index": 3, "tickets": 15},
+]

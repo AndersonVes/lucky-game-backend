@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Optional
+
 from pydantic import BaseModel, NonNegativeInt, PositiveInt
 
 
@@ -15,6 +16,7 @@ class UserBuildingOut(BaseModel):
 class NextStageOut(BaseModel):
     max: bool
     cost: Optional[int]
+    tickets_reward: Optional[int] = None
 
 
 class BuildingOut(BaseModel):
@@ -23,6 +25,7 @@ class BuildingOut(BaseModel):
     building_stages: PositiveInt
     user_building: UserBuildingOut
     next_stage: NextStageOut
+
     created_at: datetime
     updated_at: datetime | None
 

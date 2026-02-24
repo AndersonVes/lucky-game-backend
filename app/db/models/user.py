@@ -39,6 +39,13 @@ class User(Base):
         passive_deletes=True,
     )
 
+    user_village = relationship(
+        "UserVillage",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
+
     user_item = relationship(
         "UserItem",
         back_populates="user",

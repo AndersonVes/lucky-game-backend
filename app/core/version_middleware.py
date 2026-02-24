@@ -1,11 +1,10 @@
 from fastapi import Request
+from packaging.version import InvalidVersion, Version
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
 
 from app.core.database import SessionLocal
 from app.services.content_patch_service import get_active_patch
-from packaging.version import Version, InvalidVersion
-
 
 PUBLIC_PATHS = (
     "/patch/latest",

@@ -3,8 +3,10 @@ from sqlalchemy.orm import Session
 
 from app.core.deps import get_db
 from app.core.security import create_access_token
-from app.schemas.auth_schema import AuthErrorOut, AuthOut, FacebookLoginIn, GoogleLoginIn
-from app.services.auth_facebook import get_facebook_user, validate_facebook_token
+from app.schemas.auth_schema import (AuthErrorOut, AuthOut, FacebookLoginIn,
+                                     GoogleLoginIn)
+from app.services.auth_facebook import (get_facebook_user,
+                                        validate_facebook_token)
 from app.services.auth_google import validate_google_token
 from app.services.user_service import get_or_create_user
 

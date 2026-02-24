@@ -1,5 +1,5 @@
-from app.db.models import Event
 from app.core.database import SessionLocal
+from app.db.models import Event
 
 
 def seed_events(db):

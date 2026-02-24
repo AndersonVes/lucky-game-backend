@@ -1,4 +1,5 @@
-from sqlalchemy import Boolean, CheckConstraint, Column, DateTime, Enum, Float, Integer, String
+from sqlalchemy import (Boolean, CheckConstraint, Column, DateTime, Enum,
+                        Float, Integer, String)
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base

@@ -25,7 +25,6 @@ class Wallet(Base):
     user = relationship("User", back_populates="wallet")
 
 
-# TODO reset multiem jackpot ou direto no addcurr
 
 # TODO RECOMPENSA DE AD
 # o que eu recebo

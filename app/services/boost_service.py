@@ -3,11 +3,8 @@ from typing import Literal
 
 from requests import Session
 
-from app.config.game_consts import (
-    BOOST_MAX_ACTIVE_MULTIPLIER,
-    BOOST_MAX_DURATION,
-    BOOST_XP_MULTIPLIERS,
-)
+from app.config.game_consts import (BOOST_MAX_ACTIVE_MULTIPLIER,
+                                    BOOST_MAX_DURATION, BOOST_XP_MULTIPLIERS)
 from app.db.models.user import User
 from app.db.models.user_boost import UserBoost
 

@@ -1,5 +1,6 @@
 from pydantic import BaseModel, NonNegativeInt
 
+
 class WalletOut(BaseModel):
     coins: NonNegativeInt
     gems: NonNegativeInt

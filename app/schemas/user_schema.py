@@ -1,7 +1,9 @@
-from typing import Optional
-from click import Option
-from pydantic import BaseModel, EmailStr, NonNegativeFloat, NonNegativeInt, PositiveFloat, PositiveInt
 from datetime import datetime
+from typing import Optional
+
+from click import Option
+from pydantic import (BaseModel, EmailStr, NonNegativeFloat, NonNegativeInt,
+                      PositiveFloat, PositiveInt)
 
 from app.schemas.wallet_schema import WalletOut
 

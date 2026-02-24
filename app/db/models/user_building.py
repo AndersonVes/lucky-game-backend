@@ -15,6 +15,8 @@ class UserBuilding(Base):
 
     current_stage = Column(Integer, nullable=False, default=0)
 
+    ticket_stage_reward = Column(Integer, nullable=True)
+
     # timestamps
     created_at = Column(DateTime(timezone=True), default=utcnow)
     updated_at = Column(DateTime(timezone=True), onupdate=utcnow)

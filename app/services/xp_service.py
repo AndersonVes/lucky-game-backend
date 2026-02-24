@@ -2,7 +2,8 @@ import math
 
 from sqlalchemy.orm import Session
 
-from app.config.game_consts import XP_BASE, XP_BUILDINGS_STAGE_GROWTH, XP_GROWTH
+from app.config.game_consts import (XP_BASE, XP_BUILDINGS_STAGE_GROWTH,
+                                    XP_GROWTH)
 from app.db.models.user import User
 
 

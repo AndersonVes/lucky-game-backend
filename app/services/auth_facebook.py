@@ -1,5 +1,7 @@
 import requests
+
 from app.core.config import settings
+
 
 def validate_facebook_token(token: str):
     app_token = f"{settings.FB_APP_ID}|{settings.FB_APP_SECRET}"

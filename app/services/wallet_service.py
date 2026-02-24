@@ -12,7 +12,7 @@ from app.helpers.calc_helper import get_building_cost_modifier
 from app.helpers.time_helper import utcnow
 from app.services.boost_service import get_active_boost_multiplier
 from app.services.reset_service import get_reset_coins_multiplier
-from app.services.village_service import get_next_cheaper_building_stage_cost
+from app.services.building_service import get_building_stage_cost_by_cost_rank
 
 
 def _get_coins_from_reward_slug(
@@ -21,7 +21,7 @@ def _get_coins_from_reward_slug(
     reward_slug: Literal["coins_low", "coins_high", "coins_jackpot"],
 ) -> int:
 
-    cheapest_cost = get_next_cheaper_building_stage_cost(db, user)
+    cheapest_cost = get_building_stage_cost_by_cost_rank(db, user)
 
     if not cheapest_cost:
         return 0
@@ -122,7 +122,10 @@ def add_currency(
 
 
 def deduce_currency(
-    db: Session, user: User, currency: Literal["xp", "coins", "gems", "energy", "tickets"], amount: int
+    db: Session,
+    user: User,
+    currency: Literal["xp", "coins", "gems", "energy", "tickets"],
+    amount: int,
 ):
     amount = int(amount)
     setattr(user.wallet, currency, getattr(user.wallet, currency) - (amount))
@@ -137,17 +140,12 @@ def deduce_currency(
 
 
 def get_wallet_by_user(db: Session, user: User) -> Wallet:
-    print("user ", user)
     return
 
 
 def _calculate_energy_gain(last_energy_at: datetime) -> int:
     elapsed_seconds = (utcnow() - last_energy_at).total_seconds()
     energy_gain = max(0, int(elapsed_seconds // WALLET_MAX_ENERGY_SECONDS))
-    print("last_energy_at", last_energy_at)
-    print("utcnow()", utcnow())
-    print("elapsed_seconds", elapsed_seconds)
-    print("energy_gain", energy_gain)
     return energy_gain
 
 

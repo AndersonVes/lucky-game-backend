@@ -1,14 +1,5 @@
-from sqlalchemy import (
-    CheckConstraint,
-    Column,
-    DateTime,
-    Enum,
-    ForeignKey,
-    Integer,
-    String,
-    UniqueConstraint,
-    desc,
-)
+from sqlalchemy import (CheckConstraint, Column, DateTime, Enum, ForeignKey,
+                        Integer, String, UniqueConstraint, desc)
 from sqlalchemy.orm import relationship
 
 from app.db.models.base import Base

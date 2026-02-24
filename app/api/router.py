@@ -1,15 +1,15 @@
 from fastapi import APIRouter
 from requests import patch
 
-from app.api.cards_routes import router as cards_router
 from app.api.auth_routes import router as auth_router
-from app.api.patch_routes import router as patch_router
-from app.api.village_routes import router as village_router
-from app.api.user_routes import router as user_router
-from app.api.system_routes import router as system_router
-from app.api.items_routes import router as items_router
+from app.api.cards_routes import router as cards_router
 from app.api.dev_routes import router as dev_router
 from app.api.events_routes import router as events_router
+from app.api.items_routes import router as items_router
+from app.api.patch_routes import router as patch_router
+from app.api.system_routes import router as system_router
+from app.api.user_routes import router as user_router
+from app.api.village_routes import router as village_router
 
 api_router = APIRouter()
 
