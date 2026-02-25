@@ -57,3 +57,17 @@ TICKETS_BUILDING_REWARD_STAGE = [
     {"index": 2, "tickets": 10},
     {"index": 3, "tickets": 15},
 ]
+
+# DAILY REWARD
+DAILY_REWARD = [
+    {"day": 1, "tickets": 1, "gems": 0},
+    {"day": 2, "tickets": 1, "gems": 0},
+    {"day": 3, "tickets": 2, "gems": 1},
+    {"day": 4, "tickets": 2, "gems": 0},
+    {"day": 5, "tickets": 2, "gems": 0},
+    {"day": 6, "tickets": 3, "gems": 1},
+    {"day": 7, "tickets": 4, "gems": 2},
+    {"day": 8, "tickets": 3, "gems": 1},
+    {"day": 9, "tickets": 4, "gems": 2},
+    {"day": 10, "tickets": 6, "gems": 5},
+]

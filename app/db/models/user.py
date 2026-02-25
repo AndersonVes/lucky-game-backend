@@ -25,6 +25,10 @@ class User(Base):
     actual_village = Column(Integer, nullable=False, default=1)
     resets = Column(Integer, nullable=False, default=0)
 
+    # daily reward
+    last_daily_reward_won_at = Column(DateTime(timezone=True), nullable=True)
+    consecutive_days_logged_in = Column(Integer, nullable=False, default=0)
+
     # cards
     last_jackpot_at = Column(DateTime(timezone=True), nullable=True)
 

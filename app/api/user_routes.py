@@ -1,3 +1,5 @@
+from app.config.game_consts import DAILY_REWARD
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -74,3 +76,7 @@ def delete_user(db: Session = Depends(get_db), current_user: User = Depends(get_
     except HTTPException as e:
         db.rollback()
         raise
+
+@router.get("/daily-reward")
+def get_daily_reward():
+    return DAILY_REWARD
