@@ -34,10 +34,10 @@ class EnergyDataOut(BaseModel):
 
 # USER
 class XpOut(BaseModel):
-    user_level: NonNegativeInt
+    user_rank: NonNegativeInt
     current_xp: NonNegativeInt
-    xp_to_current_level: NonNegativeInt
-    xp_to_next_level: NonNegativeInt
+    xp_to_current_rank: NonNegativeInt
+    xp_to_next_rank: NonNegativeInt
 
 class UserOut(BaseModel):
     full_name: str

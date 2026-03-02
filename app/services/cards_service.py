@@ -369,7 +369,7 @@ def draw_card_weighted(
 
             result = add_currency(db, user, currency="energy", reward_slug=alternative_reward)
 
-    # card_hash.used = True #TODO
+    card_hash.used = True
 
     return result
 

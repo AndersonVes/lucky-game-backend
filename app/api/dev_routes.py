@@ -8,7 +8,7 @@ from app.helpers.time_helper import dev_add_seconds
 
 def dev_only():
     env_mode = settings.ENV
-    if env_mode != "DEV": #TODO colocar isso em login dev
+    if env_mode != "DEV": 
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Not allowed. only dev"+" "+env_mode,

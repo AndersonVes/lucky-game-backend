@@ -14,6 +14,7 @@ from app.helpers.time_helper import utcnow
 from app.services.boost_service import get_active_boost_multiplier
 from app.services.building_service import get_building_stage_cost_by_cost_rank
 from app.services.reset_service import get_reset_coins_multiplier
+from app.services.xp_service import update_user_rank
 
 
 def _get_coins_from_reward_slug(
@@ -113,6 +114,9 @@ def add_currency(
         currency=currency,
     )
     db.add(wallet_transaction)
+    
+    if currency == "xp":
+        update_user_rank(db, user)
 
     return {
         "reward_data": {"amount": amount, "currency": currency, "multiplier": multiplier},

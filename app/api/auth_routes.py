@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.api.dev_routes import dev_only
 from app.core.deps import get_db
 from app.core.security import create_access_token
 from app.schemas.auth_schema import (AuthErrorOut, AuthOut, FacebookLoginIn,
@@ -20,6 +21,7 @@ router = APIRouter(prefix="/login", tags=["auth"])
     responses={
         400: {"model": AuthErrorOut},
     },
+    dependencies=[Depends(dev_only)],  # 👈 aqui
 )
 def dev_login(db: Session = Depends(get_db)) -> AuthOut:
     # ⚠️ DEV ONLY

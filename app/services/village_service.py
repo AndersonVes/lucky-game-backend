@@ -9,8 +9,7 @@ from app.db.models.user_village import UserVillage
 from app.db.models.villages import Villages
 from app.helpers.time_helper import utcnow
 from app.schemas.village_schema import BuildingOut, VillageOut
-from app.services.building_service import (add_ticket_reward_building,
-                                           get_next_stage_info)
+from app.services.building_service import add_ticket_reward_building, get_next_stage_info
 from app.services.items_service import add_item
 
 
@@ -108,12 +107,12 @@ def next_village(
     add_currency(db, user, "energy", amount=next_village.starting_reward_energy)
     add_currency(db, user, "xp", amount=next_village.starting_reward_xp)
 
-    
-
     try:
         add_item(db, user, next_village.starting_reward_item_slug)
     except Exception:
         pass
+
+    db.query(UserVillage).filter(UserVillage.user_id == user.id).delete()
 
     user_village = UserVillage(
         user_id=user.id,

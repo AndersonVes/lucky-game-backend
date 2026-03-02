@@ -192,7 +192,7 @@ def add_ticket_reward_building(
     )
 
     if not user_village:
-        raise Exception("User village not found")
+        raise Exception(f"User village not found. village_id: {user.actual_village}, user_id: {user.id}")
 
     now = utcnow()
 
