@@ -14,7 +14,7 @@ from app.services.user_service import get_or_create_user
 router = APIRouter(prefix="/login", tags=["auth"])
 #TODO fazer essa porra desse facebook e google funcionar no staging, caralho
 
-# ⚠️ DEV ONLY – remover em produção
+#TODO ⚠️ DEV ONLY – remover em produção
 @router.post(
     "/dev",
     response_model=AuthOut,

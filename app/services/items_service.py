@@ -41,6 +41,5 @@ def add_item(
         "received_at": user_item.created_at,
         "type": "item",
     }
-#TODO premios de xp e nivel
-#TODO documentar tudo no swagger e readme
+
    
